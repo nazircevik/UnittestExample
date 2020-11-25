@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "eA9Z9KKz3D9knCGdDo9XBTwqwPfjlBy/ylOhkGE8ITdmYxxRbreykl37bvGbecx9nH0RQCWjm+z4G9hrFFHJYw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\HP\\github\\UnittestExample\\UnittestExample\\Shopping\\Shopping.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
