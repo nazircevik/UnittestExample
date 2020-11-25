@@ -6,13 +6,15 @@ namespace Shopping.Tests
     [TestClass]
     public class CartTests
     {
-        [TestMethod]
-        public void Sepete_Urun_Eklenebilir()
+        private CartItem _cartItem;
+        private CartManager _cartManager;
+
+
+        [TestInitialize]
+        public void TestInitialize()
         {
-            //Arange
-            const int beklenen = 1;
-            var cartManager = new CartManager();
-            var cartItem = new CartItem
+            _cartManager = new CartManager();
+             _cartItem = new CartItem
             {
                 Product = new Product
                 {
@@ -22,10 +24,23 @@ namespace Shopping.Tests
                 },
                 Quantity = 1
             };
+            _cartManager.Add(_cartItem);
+        }
 
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            _cartManager.Clear();
+        }
+
+        [TestMethod]
+        public void Sepete_Urun_Eklenebilir()
+        {
+            //Arange
+            const int beklenen = 1;           
             //act
-            cartManager.Add(cartItem);
-            var toplamelamansayisi = cartManager.TotalItems;
+            
+            var toplamelamansayisi = _cartManager.TotalItems;
             //Assert
             Assert.AreEqual(beklenen, toplamelamansayisi);
 
@@ -33,17 +48,11 @@ namespace Shopping.Tests
 
         [TestMethod]
         public void Sepette_olan_urun_cikarilabilmelidir()
-        {
-            //Arange
-            var cartManager = new CartManager();
-            var cartItem = new CartItem { 
-            Product = new Product { ProductId=1,ProductName="LAptop",UnitPrice=2500},Quantity=1
-            };
-            cartManager.Add(cartItem);
-            var sepetteolanelamansayisi = cartManager.TotalItems;
+        {         
+            var sepetteolanelamansayisi = _cartManager.TotalItems;
             //act
-            cartManager.Remove(1);
-            var sepettekalanelamansayisi = cartManager.TotalItems;
+            _cartManager.Remove(1);
+            var sepettekalanelamansayisi = _cartManager.TotalItems;
             //Assert
             Assert.AreEqual(sepetteolanelamansayisi - 1, sepettekalanelamansayisi);
 
@@ -53,19 +62,12 @@ namespace Shopping.Tests
         [TestMethod]
         public void Sepet_temizlenebilir()
         {
-            //Arange
-            var cartManager = new CartManager();
-            var cartItem = new CartItem
-            {
-                Product = new Product { ProductId = 1, ProductName = "LAptop", UnitPrice = 2500 },
-                Quantity = 1
-            };
-            cartManager.Add(cartItem);
+            //Arange       
             //act
-            cartManager.Clear();
+           _cartManager.Clear();
             //Assert
-            Assert.AreEqual(0,cartManager.TotalQuantity);
-            Assert.AreEqual(0, cartManager.TotalItems);
+            Assert.AreEqual(0,_cartManager.TotalQuantity);
+            Assert.AreEqual(0, _cartManager.TotalItems);
 
         }
     }
